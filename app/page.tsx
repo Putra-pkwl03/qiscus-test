@@ -102,7 +102,7 @@ export default function Page() {
         <Header title={room.name} participants={room.participant} />
         <div style={styles.chatArea}>
           <MessageList
-            messages={comments}
+            messages={comments.map((c) => ({ ...c, id: String(c.id) }))}
             nameOf={nameOf}
             currentUserId="customer@mail.com"
           />

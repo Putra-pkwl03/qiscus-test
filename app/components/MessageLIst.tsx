@@ -2,20 +2,25 @@
 import BubbleContent from "./BubbleContent";
 import { styles } from "./styles";
 
-type Comment = any;
+// pakai tipe sama dengan BubbleContent
+type Message =
+  | { id: string; type: "text"; message: string; sender: string }
+  | { id: string; type: "image"; message: string; sender: string; caption?: string }
+  | { id: string; type: "video"; message: string; sender: string }
+  | { id: string; type: "pdf"; message: string; sender: string; file_name?: string };
 
 export default function MessageList({
   messages,
   nameOf,
   currentUserId,
 }: {
-  messages: Comment[];
+  messages: Message[];
   nameOf: (id: string) => string;
   currentUserId: string;
 }) {
   return (
     <div style={styles.list}>
-      {messages.map((m: Comment) => {
+      {messages.map((m: Message) => {
         const isMine = m.sender === currentUserId;
 
         return (
