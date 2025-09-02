@@ -1,0 +1,47 @@
+erDiagram
+  USERS {
+    int id PK
+    varchar email
+    varchar name
+    varchar avatar_url
+    datetime created_at
+  }
+  ROOMS {
+    int id PK
+    varchar name
+    enum type "single|group"
+    varchar image_url
+    datetime created_at
+  }
+  ROOM_PARTICIPANTS {
+    int id PK
+    int room_id FK
+    int user_id FK
+    int role  "0=admin,1=agent,2=customer"
+    datetime joined_at
+  }
+  MESSAGES {
+    int id PK
+    int room_id FK
+    int sender_id FK
+    enum type "text|image|video|pdf"
+    text content
+    varchar file_name
+    varchar thumbnail_url
+    datetime created_at
+    bool edited
+    bool deleted
+  }
+  ATTACHMENTS {
+    int id PK
+    int message_id FK
+    varchar url
+    varchar mime_type
+    bigint size
+  }
+
+  USERS ||--o{ ROOM_PARTICIPANTS : ""
+  ROOMS ||--o{ ROOM_PARTICIPANTS : ""
+  ROOMS ||--o{ MESSAGES : ""
+  USERS ||--o{ MESSAGES : "sender"
+  MESSAGES ||--o{ ATTACHMENTS : ""
