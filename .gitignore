@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# custom ignore
+chat-sequence.md
+er-digaram.mmd
+chat-sequence.png
+
